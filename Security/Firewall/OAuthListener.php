@@ -79,9 +79,7 @@ class OAuthListener implements ListenerInterface
                 return $event->setResponse($returnValue);
             }
         } catch (AuthenticationException $e) {
-            if (null !== $p = $e->getPrevious()) {
-                $event->setResponse($p->getHttpResponse());
-            }
+            $this->securityContext->setToken(null);
         }
     }
 }
